@@ -6,6 +6,6 @@ namespace ViewModels.Article
     {
         public string Id { get; set; }
         public string Headline { get; set; }
-        public string ShortText { get; set; }
+        public string Text { get; set; }
     }
 }

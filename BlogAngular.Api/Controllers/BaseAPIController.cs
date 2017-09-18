@@ -3,9 +3,11 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace BlogAngular.Api.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class BaseAPIController : ApiController
     {
         protected HttpResponseMessage ToJson(dynamic obj)

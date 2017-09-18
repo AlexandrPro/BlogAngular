@@ -23,6 +23,7 @@ namespace BlogAngular.Api.Controllers
             return ToJson(articleService.GetAll());
         }
 
+
         // GET: api/Article/5
         public HttpResponseMessage Get(string articleId)
         {

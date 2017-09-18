@@ -11,6 +11,9 @@ namespace BlogAngular.Api
         {
             // Web API configuration and services
 
+            // Add support CORS
+            config.EnableCors();
+
             // Web API routes
             config.MapHttpAttributeRoutes();
 

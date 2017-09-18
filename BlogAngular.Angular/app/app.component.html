@@ -1,0 +1,51 @@
+﻿<input type="button" value="Add article" class="btn btn-default" (click)="addArticle()" />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Headline</td>
+            <td>Text</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <ng-template [ngTemplateOutlet]="loadTemplate(article)"
+                         [ngOutletContext]="{ $implicit: article}">
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
+<div>{{statusMessage}}</div>
+
+
+<!--template for reading-->
+<ng-template #readOnlyTemplate let-user>
+    <td>{{article.Id}}</td>
+    <td>{{article.Headline}}</td>
+    <td>{{article.Text}}</td>
+    <td>
+        <input type="button" value="Update" class="btn btn-default" (click)="editArticle(article)" />
+    </td>
+    <td>
+        <input type="button" value="Delete" (click)="deleteArticle(article)" class="btn btn-danger" />
+    </td>
+</ng-template>
+
+<!--template for editing-->
+<ng-template #editTemplate>
+    <td>
+        <input type="text" [(ngModel)]="editedArticle.Id" readonly disabled class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedArticle.Headline" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedArticle.Text" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Save" (click)="saveArticle()" class="btn btn-success" />
+    </td>
+    <td>
+        <input type="button" value="Cansel" (click)="cancel()" class="btn btn-warning" />
+    </td>
+</ng-template>

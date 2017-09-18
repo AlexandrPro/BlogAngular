@@ -25,7 +25,7 @@ namespace BlogAngular.Services
             {
                 Id = x.Id,
                 Headline = x.Headline,
-                ShortText = x.Text,
+                Text = x.Text,
             });
         }
 
