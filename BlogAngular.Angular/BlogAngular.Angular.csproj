@@ -162,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\Components\article.component.html" />
+    <Content Include="app\Components\comment.component.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -221,9 +222,12 @@
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\app.routing.ts" />
     <TypeScriptCompile Include="app\Components\article.component.ts" />
+    <TypeScriptCompile Include="app\Components\comment.component.ts" />
     <TypeScriptCompile Include="app\main.ts" />
     <TypeScriptCompile Include="app\Models\article.ts" />
+    <TypeScriptCompile Include="app\Models\comment.ts" />
     <TypeScriptCompile Include="app\Service\article.service.ts" />
+    <TypeScriptCompile Include="app\Service\comment.service.ts" />
     <TypeScriptCompile Include="app\shared\enum.ts" />
     <TypeScriptCompile Include="app\shared\global.ts" />
   </ItemGroup>

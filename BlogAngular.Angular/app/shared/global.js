@@ -5,6 +5,7 @@ var Global = (function () {
     }
     return Global;
 }());
-Global.BASE_USER_ENDPOINT = 'http://localhost:55000/api/article/';
+Global.BASE_ARTICLE_ENDPOINT = 'http://localhost:55000/api/article/';
+Global.BASE_COMMENT_ENDPOINT = 'http://localhost:55000/api/comment/';
 exports.Global = Global;
 //# sourceMappingURL=global.js.map

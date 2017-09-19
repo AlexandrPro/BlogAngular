@@ -7,14 +7,15 @@ import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
-//import { HomeComponent } from './components/home.component';
 import { ArticleService } from './Service/article.service'
 import { ArticleComponent } from './components/article.component';
+import { CommentService } from './Service/comment.service'
+import { CommentComponent } from './components/comment.component';
 
 @NgModule({
     imports: [BrowserModule, ReactiveFormsModule, HttpModule, routing, Ng2Bs3ModalModule],
-    declarations: [AppComponent/*, HomeComponent*/, ArticleComponent],
-    providers: [{ provide: APP_BASE_HREF, useValue: '/' }, ArticleService],
+    declarations: [AppComponent, ArticleComponent, CommentComponent],
+    providers: [{ provide: APP_BASE_HREF, useValue: '/' }, ArticleService, CommentService],
     bootstrap: [AppComponent]
 })
 

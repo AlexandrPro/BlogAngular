@@ -5,18 +5,17 @@
     <div class='panel-body'>
         <div class='table-responsive'>
             <div style="padding-bottom:10px"><button class="btn btn-primary" (click)="addArticle()">Add new article</button></div>
-            <div class="alert alert-info" role="alert" *ngIf="indLoading"><img src="../../images/loading.gif" width="32" height="32" /> Loading...</div>
+            <div class="alert alert-info" role="alert" *ngIf="indLoading">Loading...</div>
             <div *ngIf='articles && articles.length==0' class="alert alert-info" role="alert">No record found!</div>
             <div *ngIf='articles && articles.length'>
-                <div>
-                    <div *ngFor="let article of articles">
-                        <h2>{{article.Headline}}</h2>
-                        <div>{{article.Text}}</div>
-                        <div>
-                            <button title="Edit" class="btn btn-primary" (click)="editArticle(article.Id)">Edit</button>
-                            <button title="Delete" class="btn btn-danger" (click)="deleteArticle(article.Id)">Delete</button>
-                        </div>
+                <div *ngFor="let article of articles">
+                    <h2>{{article.Headline}}</h2>
+                    <div>{{article.Text}}</div>
+                    <div>
+                        <button title="Edit" class="btn btn-primary" (click)="editArticle(article.Id)">Edit</button>
+                        <button title="Delete" class="btn btn-danger" (click)="deleteArticle(article.Id)">Delete</button>
                     </div>
+                    <comment-app [ArticleId]="article.Id"></comment-app>
                 </div>
             </div>
             <div>
@@ -31,7 +30,7 @@
     </div>
 </div>
 
-<modal #modal>
+<modal #modalArticle>
     <form novalidate (ngSubmit)="onSubmit(articleFrm)" [formGroup]="articleFrm">
         <modal-header [show-close]="true">
             <h4 class="modal-title">{{modalTitle}}</h4>
@@ -43,7 +42,7 @@
                     <input type="text" class="form-control" placeholder="Headline" formControlName="Headline">
                 </div>
                 <div>
-                    <span>Text</span>
+                    <span>Text*</span>
                     <textarea rows="30" class="form-control" placeholder="Text" formControlName="Text"></textarea>
                 </div>
             </div>

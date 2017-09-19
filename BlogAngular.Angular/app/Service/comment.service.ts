@@ -4,20 +4,21 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
-import { Article } from '../Models/article';
+import { Comment } from '../Models/comment';
 
 @Injectable()
-export class ArticleService {
+export class CommentService {
     constructor(private _http: Http) { }
 
-    get(url: string): Observable<Article[]> {
-        return this._http.get(url)
+    get(url: string, articleId: string): Observable<Comment[]> {
+        return this._http.get(url + '?articleId=' + articleId)
             .map((response: Response) => <any>response.json())
             // .do(data => console.log("All: " + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
-    post(url: string, model: Article): Observable<any> {
+    post(url: string, model: Comment, articleId: string): Observable<any> {
+        model.ArticleId = articleId;
         let body = JSON.stringify(model);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
@@ -26,7 +27,7 @@ export class ArticleService {
             .catch(this.handleError);
     }
 
-    put(url: string, id: number, model: Article): Observable<any> {
+    put(url: string, id: number, model: Comment): Observable<any> {
         let body = JSON.stringify(model);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });

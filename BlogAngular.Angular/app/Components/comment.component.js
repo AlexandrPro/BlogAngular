@@ -14,115 +14,118 @@ var forms_1 = require("@angular/forms");
 var ng2_bs3_modal_1 = require("ng2-bs3-modal/ng2-bs3-modal");
 var enum_1 = require("../Shared/enum");
 var global_1 = require("../Shared/global");
-var article_service_1 = require("../Service/article.service");
-var ArticleComponent = (function () {
-    function ArticleComponent(fb, _articleService) {
+var comment_service_1 = require("../Service/comment.service");
+var CommentComponent = (function () {
+    function CommentComponent(fb, _commentService) {
         this.fb = fb;
-        this._articleService = _articleService;
+        this._commentService = _commentService;
         this.indLoading = false;
     }
-    ArticleComponent.prototype.ngOnInit = function () {
-        this.articleFrm = this.fb.group({
-            Id: [''],
-            Headline: ['', forms_1.Validators.required],
+    CommentComponent.prototype.ngOnInit = function () {
+        this.commentFrm = this.fb.group({
             Text: ['', forms_1.Validators.required],
         });
-        this.LoadArticles();
+        this.LoadComments();
     };
-    ArticleComponent.prototype.LoadArticles = function () {
+    CommentComponent.prototype.LoadComments = function () {
         var _this = this;
         this.indLoading = true;
-        this._articleService.get(global_1.Global.BASE_ARTICLE_ENDPOINT)
-            .subscribe(function (articles) { _this.articles = articles; _this.indLoading = false; }, function (error) { return _this.msg = error; });
+        this._commentService.get(global_1.Global.BASE_COMMENT_ENDPOINT, this.ArticleId)
+            .subscribe(function (comments) { _this.comments = comments; _this.indLoading = false; }, function (error) { return _this.msg = error; });
     };
-    ArticleComponent.prototype.addArticle = function () {
+    CommentComponent.prototype.addComment = function () {
         this.dbops = enum_1.DBOperation.create;
         this.SetControlsState(true);
-        this.modalTitle = "Add New Article";
+        this.modalTitle = "Add New Comment";
         this.modalBtnTitle = "Add";
-        this.articleFrm.reset();
-        this.modalArticle.open();
+        this.commentFrm.reset();
+        this.modalComment.open();
     };
-    ArticleComponent.prototype.editArticle = function (id) {
+    CommentComponent.prototype.editComment = function (id) {
         this.dbops = enum_1.DBOperation.update;
         this.SetControlsState(true);
-        this.modalTitle = "Edit Article";
+        this.modalTitle = "Edit Comment";
         this.modalBtnTitle = "Update";
-        this.article = this.articles.filter(function (x) { return x.Id == id; })[0];
-        this.articleFrm.setValue(this.article);
-        this.modalArticle.open();
+        this.comment = this.comments.filter(function (x) { return x.Id == id; })[0];
+        this.commentFrm.setValue(this.comment);
+        this.modalComment.open();
     };
-    ArticleComponent.prototype.deleteArticle = function (id) {
+    CommentComponent.prototype.deleteComment = function (id) {
         this.dbops = enum_1.DBOperation.delete;
         this.SetControlsState(false);
         this.modalTitle = "Confirm to Delete?";
         this.modalBtnTitle = "Delete";
-        this.article = this.articles.filter(function (x) { return x.Id == id; })[0];
-        this.articleFrm.setValue(this.article);
-        this.modalArticle.open();
+        this.comment = this.comments.filter(function (x) { return x.Id == id; })[0];
+        this.commentFrm.setValue(this.comment);
+        this.modalComment.open();
     };
-    ArticleComponent.prototype.SetControlsState = function (isEnable) {
-        isEnable ? this.articleFrm.enable() : this.articleFrm.disable();
+    CommentComponent.prototype.SetControlsState = function (isEnable) {
+        isEnable ? this.commentFrm.enable() : this.commentFrm.disable();
     };
-    ArticleComponent.prototype.onSubmit = function (formData) {
+    CommentComponent.prototype.onSubmit = function (formData) {
         var _this = this;
         this.msg = "";
         switch (this.dbops) {
             case enum_1.DBOperation.create:
-                this._articleService.post(global_1.Global.BASE_ARTICLE_ENDPOINT, formData._value).subscribe(function (data) {
+                this._commentService.post(global_1.Global.BASE_COMMENT_ENDPOINT, formData._value, this.ArticleId).subscribe(function (data) {
                     if (data == 1) {
                         _this.msg = "Data successfully added.";
-                        _this.LoadArticles();
+                        _this.LoadComments();
                     }
                     else {
                         _this.msg = "There is some issue in saving records, please contact to system administrator!";
                     }
-                    _this.modalArticle.dismiss();
+                    _this.modalComment.dismiss();
                 }, function (error) {
                     _this.msg = error;
                 });
                 break;
             case enum_1.DBOperation.update:
-                this._articleService.put(global_1.Global.BASE_ARTICLE_ENDPOINT, formData._value.Id, formData._value).subscribe(function (data) {
+                this._commentService.put(global_1.Global.BASE_COMMENT_ENDPOINT, formData._value.Id, formData._value).subscribe(function (data) {
                     if (data == 1) {
                         _this.msg = "Data successfully updated.";
-                        _this.LoadArticles();
+                        _this.LoadComments();
                     }
                     else {
                         _this.msg = "There is some issue in saving records, please contact to system administrator!";
                     }
-                    _this.modalArticle.dismiss();
+                    _this.modalComment.dismiss();
                 }, function (error) {
                     _this.msg = error;
                 });
                 break;
             case enum_1.DBOperation.delete:
-                this._articleService.delete(global_1.Global.BASE_ARTICLE_ENDPOINT, formData._value.Id).subscribe(function (data) {
+                this._commentService.delete(global_1.Global.BASE_COMMENT_ENDPOINT, formData._value.Id).subscribe(function (data) {
                     if (data == 1) {
                         _this.msg = "Data successfully deleted.";
-                        _this.LoadArticles();
+                        _this.LoadComments();
                     }
                     else {
                         _this.msg = "There is some issue in saving records, please contact to system administrator!";
                     }
-                    _this.modalArticle.dismiss();
+                    _this.modalComment.dismiss();
                 }, function (error) {
                     _this.msg = error;
                 });
                 break;
         }
     };
-    return ArticleComponent;
+    return CommentComponent;
 }());
 __decorate([
-    core_1.ViewChild('modalArticle'),
+    core_1.Input(),
+    __metadata("design:type", String)
+], CommentComponent.prototype, "ArticleId", void 0);
+__decorate([
+    core_1.ViewChild('modalComment'),
     __metadata("design:type", ng2_bs3_modal_1.ModalComponent)
-], ArticleComponent.prototype, "modalArticle", void 0);
-ArticleComponent = __decorate([
+], CommentComponent.prototype, "modalComment", void 0);
+CommentComponent = __decorate([
     core_1.Component({
-        templateUrl: 'app/Components/article.component.html'
+        selector: 'comment-app',
+        templateUrl: 'app/Components/comment.component.html'
     }),
-    __metadata("design:paramtypes", [forms_1.FormBuilder, article_service_1.ArticleService])
-], ArticleComponent);
-exports.ArticleComponent = ArticleComponent;
-//# sourceMappingURL=article.component.js.map
+    __metadata("design:paramtypes", [forms_1.FormBuilder, comment_service_1.CommentService])
+], CommentComponent);
+exports.CommentComponent = CommentComponent;
+//# sourceMappingURL=comment.component.js.map

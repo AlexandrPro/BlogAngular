@@ -16,31 +16,28 @@ namespace BlogAngular.Api.Controllers
         {
             commentService = new CommentService();
         }
-
-        // GET: api/Comment
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
+        
         // GET: api/Comment/5
-        //public HttpResponseMessage Get(string articleId)
-        //{
-        //    return ToJson(commentService.GetArticleComments(articleId));
-        //}
+        [HttpGet]
+        public HttpResponseMessage Get(string articleId)
+        {
+            return ToJson(commentService.GetArticleComments(articleId));
+        }
 
         // POST: api/Comment
-        public void Post([FromBody]CreateCommentViewModel value)
+        public HttpResponseMessage Post([FromBody]CreateCommentViewModel value)
         {
             commentService.Create(value);
+            return ToJson(1);
         }
 
         // PUT: api/Comment/5
-        public void Put(string id, [FromBody]EditCommentViewModel value)
+        public HttpResponseMessage Put(string id, [FromBody]EditCommentViewModel value)
         {
             if (value != null)
             {
                 commentService.Edit(id, value);
+                return ToJson(1);
             }
             else
             {
@@ -49,9 +46,10 @@ namespace BlogAngular.Api.Controllers
         }
 
         // DELETE: api/Comment/5
-        public void Delete(string id)
+        public HttpResponseMessage Delete(string id)
         {
             commentService.Delete(id);
+            return ToJson(1);
         }
     }
 }

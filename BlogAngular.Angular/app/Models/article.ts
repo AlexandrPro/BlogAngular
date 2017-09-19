@@ -1,5 +1,5 @@
-﻿export interface IArticle {
-    Id: string,
-    Headline: string,
-    Text: string
+﻿export class Article {
+    public Id: string;
+    public Headline: string;
+    public Text: string;
 }

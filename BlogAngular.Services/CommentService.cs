@@ -12,11 +12,13 @@ namespace BlogAngular.Services
     {
         BlogContext db;
         CommentRepository commentRepository;
+        ArticleRepository articleRepository;
 
         public CommentService()
         {
             db = new BlogContext();
             commentRepository = new CommentRepository(db);
+            articleRepository = new ArticleRepository(db);
         }
 
         public IEnumerable<IndexCommentViewModel> GetArticleComments(string articleId)
@@ -31,9 +33,11 @@ namespace BlogAngular.Services
 
         public void Create(CreateCommentViewModel value)
         {
+            Article article = articleRepository.GetByID(value.ArticleId);
             commentRepository.Insert(new Comment
             {
                 Text = value.Text,
+                Article = article,
             });
 
             commentRepository.Save();
