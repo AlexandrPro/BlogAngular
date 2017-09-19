@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\Vi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogAngular.Services", "BlogAngular.Services\BlogAngular.Services.csproj", "{6D342B83-B9FD-49A5-B9F2-F8DBA008850F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogAngular.Angular", "BlogAngular.Angular\BlogAngular.Angular.csproj", "{36E05B41-3900-49F9-AA2A-3AB17599EFF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogAngular.Angular", "BlogAngular.Angular\BlogAngular.Angular.csproj", "{175CDFD2-BAC5-4F35-81E6-08517350EC48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +43,10 @@ Global
 		{6D342B83-B9FD-49A5-B9F2-F8DBA008850F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D342B83-B9FD-49A5-B9F2-F8DBA008850F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D342B83-B9FD-49A5-B9F2-F8DBA008850F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{36E05B41-3900-49F9-AA2A-3AB17599EFF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36E05B41-3900-49F9-AA2A-3AB17599EFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36E05B41-3900-49F9-AA2A-3AB17599EFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36E05B41-3900-49F9-AA2A-3AB17599EFF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{175CDFD2-BAC5-4F35-81E6-08517350EC48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{175CDFD2-BAC5-4F35-81E6-08517350EC48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{175CDFD2-BAC5-4F35-81E6-08517350EC48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{175CDFD2-BAC5-4F35-81E6-08517350EC48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
