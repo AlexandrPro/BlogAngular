@@ -23,6 +23,7 @@ var CommentComponent = (function () {
     }
     CommentComponent.prototype.ngOnInit = function () {
         this.commentFrm = this.fb.group({
+            Id: [''],
             Text: ['', forms_1.Validators.required],
         });
         this.LoadComments();
