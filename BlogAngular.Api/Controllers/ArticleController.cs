@@ -31,17 +31,19 @@ namespace BlogAngular.Api.Controllers
         }
 
         // POST: api/Article
-        public void Post([FromBody]CreateArticleViewModel value)
+        public HttpResponseMessage Post([FromBody]CreateArticleViewModel value)
         {
             articleService.Create(value);
+            return ToJson(1);
         }
 
         // PUT: api/Article/5
-        public void Put(string id, [FromBody]EditArticleViewModel value)
+        public HttpResponseMessage Put(string id, [FromBody]EditArticleViewModel value)
         {
             if (value != null)
             {
                 articleService.Edit(id, value);
+                return ToJson(1);
             }
             else
             {
@@ -50,9 +52,10 @@ namespace BlogAngular.Api.Controllers
         }
 
         // DELETE: api/Article/5
-        public void Delete(string id)
+        public HttpResponseMessage Delete(string id)
         {
             articleService.Delete(id);
+            return ToJson(1);
         }
     }
 }
