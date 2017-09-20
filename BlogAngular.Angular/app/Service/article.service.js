@@ -25,7 +25,7 @@ var ArticleService = (function () {
             .catch(this.handleError);
     };
     ArticleService.prototype.getById = function (url, id) {
-        return this._http.get(url + id)
+        return this._http.get(url + '?articleId=' + id)
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };

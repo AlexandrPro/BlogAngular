@@ -32,16 +32,16 @@ namespace BlogAngular.Services
         public DetailsArticleViewModel GetById(string articleId)
         {
             Article article = articleRepository.GetByID(articleId);
-            List<CommentViewModel> commentViewModels = article.Comments.Select(x => new CommentViewModel
-            {
-                Text = x.Text,
-            }).ToList();
+            //List<CommentViewModel> commentViewModels = article.Comments.Select(x => new CommentViewModel
+            //{
+            //    Text = x.Text,
+            //}).ToList();
             
             return new DetailsArticleViewModel
             {
                 Headline = article.Headline,
-                ShortText = article.Text,
-                Comments = commentViewModels,
+                Text = article.Text,
+                //Comments = commentViewModels,
             };
         }
 

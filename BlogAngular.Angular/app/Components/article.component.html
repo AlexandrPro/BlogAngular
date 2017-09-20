@@ -9,7 +9,7 @@
             <div *ngIf='articles && articles.length==0' class="alert alert-info" role="alert">No record found!</div>
             <div *ngIf='articles && articles.length'>
                 <div *ngFor="let article of articles">
-                    <a [routerLink]="['deteils', '5']"><h2>{{article.Headline}}</h2></a>
+                    <a [routerLink]="['deteils', article.Id]"><h2>{{article.Headline}}</h2></a>
                     <div>{{article.Text}}</div>
                     <div>
                         <button title="Edit" class="btn btn-primary" (click)="editArticle(article.Id)">Edit</button>

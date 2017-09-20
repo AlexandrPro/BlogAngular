@@ -11,17 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
-var ng2_bs3_modal_1 = require("ng2-bs3-modal/ng2-bs3-modal");
+var router_1 = require("@angular/router");
 var global_1 = require("../Shared/global");
 var article_service_1 = require("../Service/article.service");
 var DeteilsComponent = (function () {
-    function DeteilsComponent(fb, _articleService) {
+    function DeteilsComponent(route, fb, _articleService) {
+        this.route = route;
         this.fb = fb;
         this._articleService = _articleService;
-        this.id = "changemepls"; //CHANGE IT 
         this.indLoading = false;
     }
     DeteilsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route$ = this.route.params.subscribe(function (params) {
+            _this.id = params["id"];
+        });
         this.articleFrm = this.fb.group({
             Id: [''],
             Headline: ['', forms_1.Validators.required],
@@ -29,23 +33,26 @@ var DeteilsComponent = (function () {
         });
         this.LoadArticle();
     };
+    DeteilsComponent.prototype.ngOnDestroy = function () {
+        if (this.route$)
+            this.route$.unsubscribe();
+    };
     DeteilsComponent.prototype.LoadArticle = function () {
         var _this = this;
         this.indLoading = true;
         this._articleService.getById(global_1.Global.BASE_ARTICLE_ENDPOINT, this.id)
-            .subscribe(function (article) { _this.article = article; _this.indLoading = false; }, function (error) { return _this.msg = error; });
+            .subscribe(function (article) {
+            _this.article = article;
+            _this.indLoading = false;
+        }, function (error) { return _this.msg = error; });
     };
     return DeteilsComponent;
 }());
-__decorate([
-    core_1.ViewChild('modalArticle'),
-    __metadata("design:type", ng2_bs3_modal_1.ModalComponent)
-], DeteilsComponent.prototype, "modalArticle", void 0);
 DeteilsComponent = __decorate([
     core_1.Component({
         templateUrl: 'app/Components/deteils.component.html'
     }),
-    __metadata("design:paramtypes", [forms_1.FormBuilder, article_service_1.ArticleService])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute, forms_1.FormBuilder, article_service_1.ArticleService])
 ], DeteilsComponent);
 exports.DeteilsComponent = DeteilsComponent;
 //# sourceMappingURL=deteils.component.js.map

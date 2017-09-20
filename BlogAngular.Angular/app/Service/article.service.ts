@@ -18,7 +18,7 @@ export class ArticleService {
     }
 
     getById(url: string, id: string): Observable<Article> {
-        return this._http.get(url + id)
+        return this._http.get(url + '?articleId=' + id)
             .map((response: Response) => <any>response.json())
             // .do(data => console.log("All: " + JSON.stringify(data)))
             .catch(this.handleError);
