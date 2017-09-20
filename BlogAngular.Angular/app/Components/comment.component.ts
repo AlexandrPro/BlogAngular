@@ -68,13 +68,23 @@ export class CommentComponent implements OnInit {
     }
 
     deleteComment(id: string) {
-        this.dbops = DBOperation.delete;
-        this.SetControlsState(false);
-        this.modalTitle = "Confirm to Delete?";
-        this.modalBtnTitle = "Delete";
-        this.comment = this.comments.filter(x => x.Id == id)[0];
-        this.commentFrm.setValue(this.comment);
-        //this.modalComment.open();
+        this._commentService.delete(Global.BASE_COMMENT_ENDPOINT, id).subscribe(
+            data => {
+                if (data == 1) //Success
+                {
+                    this.msg = "Data successfully deleted.";
+                    this.LoadComments();
+                }
+                else {
+                    this.msg = "There is some issue in saving records, please contact to system administrator!"
+                }
+
+                //this.addComment();
+            },
+            error => {
+                this.msg = error;
+            }
+        );
     }
 
     SetControlsState(isEnable: boolean) {
@@ -110,25 +120,6 @@ export class CommentComponent implements OnInit {
                         if (data == 1) //Success
                         {
                             this.msg = "Data successfully updated.";
-                            this.LoadComments();
-                        }
-                        else {
-                            this.msg = "There is some issue in saving records, please contact to system administrator!"
-                        }
-
-                        this.addComment();
-                    },
-                    error => {
-                        this.msg = error;
-                    }
-                );
-                break;
-            case DBOperation.delete:
-                this._commentService.delete(Global.BASE_COMMENT_ENDPOINT, formData._value.Id).subscribe(
-                    data => {
-                        if (data == 1) //Success
-                        {
-                            this.msg = "Data successfully deleted.";
                             this.LoadComments();
                         }
                         else {

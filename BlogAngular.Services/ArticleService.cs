@@ -25,7 +25,7 @@ namespace BlogAngular.Services
             {
                 Id = x.Id,
                 Headline = x.Headline,
-                Text = x.Text,
+                Text = x.Text.Length>200 ? x.Text.Substring(0,200) + "..." : x.Text,
             });
         }
 

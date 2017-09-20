@@ -53,13 +53,19 @@ var CommentComponent = (function () {
         //this.modalComment.open();
     };
     CommentComponent.prototype.deleteComment = function (id) {
-        this.dbops = enum_1.DBOperation.delete;
-        this.SetControlsState(false);
-        this.modalTitle = "Confirm to Delete?";
-        this.modalBtnTitle = "Delete";
-        this.comment = this.comments.filter(function (x) { return x.Id == id; })[0];
-        this.commentFrm.setValue(this.comment);
-        //this.modalComment.open();
+        var _this = this;
+        this._commentService.delete(global_1.Global.BASE_COMMENT_ENDPOINT, id).subscribe(function (data) {
+            if (data == 1) {
+                _this.msg = "Data successfully deleted.";
+                _this.LoadComments();
+            }
+            else {
+                _this.msg = "There is some issue in saving records, please contact to system administrator!";
+            }
+            //this.addComment();
+        }, function (error) {
+            _this.msg = error;
+        });
     };
     CommentComponent.prototype.SetControlsState = function (isEnable) {
         isEnable ? this.commentFrm.enable() : this.commentFrm.disable();
@@ -86,20 +92,6 @@ var CommentComponent = (function () {
                 this._commentService.put(global_1.Global.BASE_COMMENT_ENDPOINT, formData._value.Id, formData._value).subscribe(function (data) {
                     if (data == 1) {
                         _this.msg = "Data successfully updated.";
-                        _this.LoadComments();
-                    }
-                    else {
-                        _this.msg = "There is some issue in saving records, please contact to system administrator!";
-                    }
-                    _this.addComment();
-                }, function (error) {
-                    _this.msg = error;
-                });
-                break;
-            case enum_1.DBOperation.delete:
-                this._commentService.delete(global_1.Global.BASE_COMMENT_ENDPOINT, formData._value.Id).subscribe(function (data) {
-                    if (data == 1) {
-                        _this.msg = "Data successfully deleted.";
                         _this.LoadComments();
                     }
                     else {

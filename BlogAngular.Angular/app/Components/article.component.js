@@ -28,6 +28,7 @@ var ArticleComponent = (function () {
             Text: ['', forms_1.Validators.required],
         });
         this.LoadArticles();
+        this.addArticle();
     };
     ArticleComponent.prototype.LoadArticles = function () {
         var _this = this;
@@ -41,7 +42,7 @@ var ArticleComponent = (function () {
         this.modalTitle = "Add New Article";
         this.modalBtnTitle = "Add";
         this.articleFrm.reset();
-        this.modalArticle.open();
+        //this.modalArticle.open();
     };
     ArticleComponent.prototype.editArticle = function (id) {
         this.dbops = enum_1.DBOperation.update;
@@ -50,16 +51,21 @@ var ArticleComponent = (function () {
         this.modalBtnTitle = "Update";
         this.article = this.articles.filter(function (x) { return x.Id == id; })[0];
         this.articleFrm.setValue(this.article);
-        this.modalArticle.open();
+        //this.modalArticle.open();
     };
     ArticleComponent.prototype.deleteArticle = function (id) {
-        this.dbops = enum_1.DBOperation.delete;
-        this.SetControlsState(false);
-        this.modalTitle = "Confirm to Delete?";
-        this.modalBtnTitle = "Delete";
-        this.article = this.articles.filter(function (x) { return x.Id == id; })[0];
-        this.articleFrm.setValue(this.article);
-        this.modalArticle.open();
+        var _this = this;
+        this._articleService.delete(global_1.Global.BASE_ARTICLE_ENDPOINT, id).subscribe(function (data) {
+            if (data == 1) {
+                _this.msg = "Data successfully deleted.";
+                _this.LoadArticles();
+            }
+            else {
+                _this.msg = "There is some issue in saving records, please contact to system administrator!";
+            }
+        }, function (error) {
+            _this.msg = error;
+        });
     };
     ArticleComponent.prototype.SetControlsState = function (isEnable) {
         isEnable ? this.articleFrm.enable() : this.articleFrm.disable();
@@ -77,7 +83,7 @@ var ArticleComponent = (function () {
                     else {
                         _this.msg = "There is some issue in saving records, please contact to system administrator!";
                     }
-                    _this.modalArticle.dismiss();
+                    _this.addArticle();
                 }, function (error) {
                     _this.msg = error;
                 });
@@ -91,21 +97,7 @@ var ArticleComponent = (function () {
                     else {
                         _this.msg = "There is some issue in saving records, please contact to system administrator!";
                     }
-                    _this.modalArticle.dismiss();
-                }, function (error) {
-                    _this.msg = error;
-                });
-                break;
-            case enum_1.DBOperation.delete:
-                this._articleService.delete(global_1.Global.BASE_ARTICLE_ENDPOINT, formData._value.Id).subscribe(function (data) {
-                    if (data == 1) {
-                        _this.msg = "Data successfully deleted.";
-                        _this.LoadArticles();
-                    }
-                    else {
-                        _this.msg = "There is some issue in saving records, please contact to system administrator!";
-                    }
-                    _this.modalArticle.dismiss();
+                    _this.addArticle();
                 }, function (error) {
                     _this.msg = error;
                 });

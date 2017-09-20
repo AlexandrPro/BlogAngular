@@ -38,6 +38,7 @@ export class ArticleComponent implements OnInit {
         });
 
         this.LoadArticles();
+        this.addArticle();
     }
 
     LoadArticles(): void {
@@ -53,7 +54,7 @@ export class ArticleComponent implements OnInit {
         this.modalTitle = "Add New Article";
         this.modalBtnTitle = "Add";
         this.articleFrm.reset();
-        this.modalArticle.open();
+        //this.modalArticle.open();
     }
 
     editArticle(id: string) {
@@ -63,17 +64,25 @@ export class ArticleComponent implements OnInit {
         this.modalBtnTitle = "Update";
         this.article = this.articles.filter(x => x.Id == id)[0];
         this.articleFrm.setValue(this.article);
-        this.modalArticle.open();
+        //this.modalArticle.open();
     }
 
     deleteArticle(id: string) {
-        this.dbops = DBOperation.delete;
-        this.SetControlsState(false);
-        this.modalTitle = "Confirm to Delete?";
-        this.modalBtnTitle = "Delete";
-        this.article = this.articles.filter(x => x.Id == id)[0];
-        this.articleFrm.setValue(this.article);
-        this.modalArticle.open();
+        this._articleService.delete(Global.BASE_ARTICLE_ENDPOINT, id).subscribe(
+            data => {
+                if (data == 1) //Success
+                {
+                    this.msg = "Data successfully deleted.";
+                    this.LoadArticles();
+                }
+                else {
+                    this.msg = "There is some issue in saving records, please contact to system administrator!"
+                }
+            },
+            error => {
+                this.msg = error;
+            }
+        );
     }
 
     SetControlsState(isEnable: boolean) {
@@ -96,7 +105,7 @@ export class ArticleComponent implements OnInit {
                             this.msg = "There is some issue in saving records, please contact to system administrator!"
                         }
 
-                        this.modalArticle.dismiss();
+                        this.addArticle();
                     },
                     error => {
                         this.msg = error;
@@ -115,26 +124,7 @@ export class ArticleComponent implements OnInit {
                             this.msg = "There is some issue in saving records, please contact to system administrator!"
                         }
 
-                        this.modalArticle.dismiss();
-                    },
-                    error => {
-                        this.msg = error;
-                    }
-                );
-                break;
-            case DBOperation.delete:
-                this._articleService.delete(Global.BASE_ARTICLE_ENDPOINT, formData._value.Id).subscribe(
-                    data => {
-                        if (data == 1) //Success
-                        {
-                            this.msg = "Data successfully deleted.";
-                            this.LoadArticles();
-                        }
-                        else {
-                            this.msg = "There is some issue in saving records, please contact to system administrator!"
-                        }
-
-                        this.modalArticle.dismiss();
+                        this.addArticle();
                     },
                     error => {
                         this.msg = error;
