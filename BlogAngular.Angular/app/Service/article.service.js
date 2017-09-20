@@ -24,6 +24,11 @@ var ArticleService = (function () {
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    ArticleService.prototype.getById = function (url, id) {
+        return this._http.get(url + id)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     ArticleService.prototype.post = function (url, model) {
         var body = JSON.stringify(model);
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });

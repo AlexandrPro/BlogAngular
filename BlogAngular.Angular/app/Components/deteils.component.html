@@ -1,0 +1,5 @@
+﻿<div *ngFor="let article of articles">
+    <h2>{{article.Headline}}</h2>
+    <div>{{article.Text}}</div>
+    <comment-app [ArticleId]="article.Id"></comment-app>
+</div>

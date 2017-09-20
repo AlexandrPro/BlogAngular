@@ -17,6 +17,13 @@ export class ArticleService {
             .catch(this.handleError);
     }
 
+    getById(url: string, id: string): Observable<Article> {
+        return this._http.get(url + id)
+            .map((response: Response) => <any>response.json())
+            // .do(data => console.log("All: " + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
     post(url: string, model: Article): Observable<any> {
         let body = JSON.stringify(model);
         let headers = new Headers({ 'Content-Type': 'application/json' });
