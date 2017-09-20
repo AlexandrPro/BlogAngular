@@ -15,7 +15,7 @@ import { ArticleService } from '../Service/article.service';
 })
 
 
-export class ArticleComponent implements OnInit {
+export class DeteilsComponent implements OnInit {
     @ViewChild('modalArticle') modalArticle: ModalComponent;
 
     id: string = "changemepls" //CHANGE IT 

@@ -14,14 +14,14 @@ var forms_1 = require("@angular/forms");
 var ng2_bs3_modal_1 = require("ng2-bs3-modal/ng2-bs3-modal");
 var global_1 = require("../Shared/global");
 var article_service_1 = require("../Service/article.service");
-var ArticleComponent = (function () {
-    function ArticleComponent(fb, _articleService) {
+var DeteilsComponent = (function () {
+    function DeteilsComponent(fb, _articleService) {
         this.fb = fb;
         this._articleService = _articleService;
         this.id = "changemepls"; //CHANGE IT 
         this.indLoading = false;
     }
-    ArticleComponent.prototype.ngOnInit = function () {
+    DeteilsComponent.prototype.ngOnInit = function () {
         this.articleFrm = this.fb.group({
             Id: [''],
             Headline: ['', forms_1.Validators.required],
@@ -29,23 +29,23 @@ var ArticleComponent = (function () {
         });
         this.LoadArticle();
     };
-    ArticleComponent.prototype.LoadArticle = function () {
+    DeteilsComponent.prototype.LoadArticle = function () {
         var _this = this;
         this.indLoading = true;
         this._articleService.getById(global_1.Global.BASE_ARTICLE_ENDPOINT, this.id)
             .subscribe(function (article) { _this.article = article; _this.indLoading = false; }, function (error) { return _this.msg = error; });
     };
-    return ArticleComponent;
+    return DeteilsComponent;
 }());
 __decorate([
     core_1.ViewChild('modalArticle'),
     __metadata("design:type", ng2_bs3_modal_1.ModalComponent)
-], ArticleComponent.prototype, "modalArticle", void 0);
-ArticleComponent = __decorate([
+], DeteilsComponent.prototype, "modalArticle", void 0);
+DeteilsComponent = __decorate([
     core_1.Component({
         templateUrl: 'app/Components/deteils.component.html'
     }),
     __metadata("design:paramtypes", [forms_1.FormBuilder, article_service_1.ArticleService])
-], ArticleComponent);
-exports.ArticleComponent = ArticleComponent;
+], DeteilsComponent);
+exports.DeteilsComponent = DeteilsComponent;
 //# sourceMappingURL=deteils.component.js.map
