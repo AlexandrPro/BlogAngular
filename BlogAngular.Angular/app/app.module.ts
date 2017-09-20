@@ -16,9 +16,11 @@ import { CommentService } from './Service/comment.service'
 import { CommentComponent } from './components/comment.component'
 import { DeteilsComponent } from './components/deteils.component';
 import { NotFoundComponent } from './components/not-found.component';
+import { IndexComponent } from './components/index.component';
 
 const appRoutes: Routes = [
-    { path: '', component: ArticleComponent },
+    { path: '', component: IndexComponent },
+    { path: 'article/', component: ArticleComponent },
     { path: 'deteils/:id', component: DeteilsComponent },
     { path: '**', component: NotFoundComponent },
 ];
@@ -36,7 +38,8 @@ const appRoutes: Routes = [
         ArticleComponent,
         CommentComponent,
         DeteilsComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        IndexComponent
     ],
     //providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
     providers: [{ provide: APP_BASE_HREF, useValue: '/' }, ArticleService, CommentService],

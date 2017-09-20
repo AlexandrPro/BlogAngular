@@ -21,8 +21,10 @@ var comment_service_1 = require("./Service/comment.service");
 var comment_component_1 = require("./components/comment.component");
 var deteils_component_1 = require("./components/deteils.component");
 var not_found_component_1 = require("./components/not-found.component");
+var index_component_1 = require("./components/index.component");
 var appRoutes = [
-    { path: '', component: article_component_1.ArticleComponent },
+    { path: '', component: index_component_1.IndexComponent },
+    { path: 'article/', component: article_component_1.ArticleComponent },
     { path: 'deteils/:id', component: deteils_component_1.DeteilsComponent },
     { path: '**', component: not_found_component_1.NotFoundComponent },
 ];
@@ -45,7 +47,8 @@ AppModule = __decorate([
             article_component_1.ArticleComponent,
             comment_component_1.CommentComponent,
             deteils_component_1.DeteilsComponent,
-            not_found_component_1.NotFoundComponent
+            not_found_component_1.NotFoundComponent,
+            index_component_1.IndexComponent
         ],
         //providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
         providers: [{ provide: common_1.APP_BASE_HREF, useValue: '/' }, article_service_1.ArticleService, comment_service_1.CommentService],

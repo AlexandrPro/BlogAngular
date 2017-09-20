@@ -1,9 +1,41 @@
-﻿@{
-    ViewBag.Title = "Index";
-}
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My angular blog</title>
+    <!--This nead for regreshing pages works-->
+    <base href="/"> 
 
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
-@*<base href="/"> FOR REFRESHING WORKS YOU MAST ADD THIS TO HEAD TAG!!!!*@
+    <!-- Custom fonts for this template -->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+    <link href="~/Content/site1.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="~/Content/clean-blog.min.css" rel="stylesheet" />
+    
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="~/Scripts/clean-blog.min.js"></script>
+
+    <!--Angular files-->
+    <script src="/node_modules/core-js/client/shim.min.js"></script>
+    <script src="/node_modules/zone.js/dist/zone.js"></script>
+    <script src="/node_modules/systemjs/dist/system.src.js"></script>
+    <script src="/systemjs.config.js"></script>
+    <script>
+        System.import('app').catch(function(err){ console.error(err); });
+    </script>
+</head>
 <body>
     <user-app>Loading…</user-app>
 </body>
+</html>
