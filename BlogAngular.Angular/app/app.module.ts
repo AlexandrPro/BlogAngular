@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import { Routes, RouterModule } from '@angular/router';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 //import { routing } from './app.routing';
@@ -14,10 +15,12 @@ import { ArticleComponent } from './components/article.component';
 import { CommentService } from './Service/comment.service'
 import { CommentComponent } from './components/comment.component'
 import { DeteilsComponent } from './components/deteils.component';
+import { NotFoundComponent } from './components/not-found.component';
 
 const appRoutes: Routes = [
     { path: '', component: ArticleComponent },
     { path: 'deteils/:id', component: DeteilsComponent },
+    { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
@@ -32,10 +35,12 @@ const appRoutes: Routes = [
         AppComponent,
         ArticleComponent,
         CommentComponent,
-        DeteilsComponent
+        DeteilsComponent,
+        NotFoundComponent
     ],
+    //providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
     providers: [{ provide: APP_BASE_HREF, useValue: '/' }, ArticleService, CommentService],
-    bootstrap: [AppComponent]
+    bootstrap: [ AppComponent ]
 })
 
 export class AppModule { }

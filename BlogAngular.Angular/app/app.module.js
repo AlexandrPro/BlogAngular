@@ -20,9 +20,11 @@ var article_component_1 = require("./components/article.component");
 var comment_service_1 = require("./Service/comment.service");
 var comment_component_1 = require("./components/comment.component");
 var deteils_component_1 = require("./components/deteils.component");
+var not_found_component_1 = require("./components/not-found.component");
 var appRoutes = [
     { path: '', component: article_component_1.ArticleComponent },
     { path: 'deteils/:id', component: deteils_component_1.DeteilsComponent },
+    { path: '**', component: not_found_component_1.NotFoundComponent },
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -42,8 +44,10 @@ AppModule = __decorate([
             app_component_1.AppComponent,
             article_component_1.ArticleComponent,
             comment_component_1.CommentComponent,
-            deteils_component_1.DeteilsComponent
+            deteils_component_1.DeteilsComponent,
+            not_found_component_1.NotFoundComponent
         ],
+        //providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
         providers: [{ provide: common_1.APP_BASE_HREF, useValue: '/' }, article_service_1.ArticleService, comment_service_1.CommentService],
         bootstrap: [app_component_1.AppComponent]
     })
