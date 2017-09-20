@@ -27,6 +27,7 @@ var CommentComponent = (function () {
             Text: ['', forms_1.Validators.required],
         });
         this.LoadComments();
+        this.addComment();
     };
     CommentComponent.prototype.LoadComments = function () {
         var _this = this;
@@ -40,7 +41,7 @@ var CommentComponent = (function () {
         this.modalTitle = "Add New Comment";
         this.modalBtnTitle = "Add";
         this.commentFrm.reset();
-        this.modalComment.open();
+        //this.modalComment.open();
     };
     CommentComponent.prototype.editComment = function (id) {
         this.dbops = enum_1.DBOperation.update;
@@ -49,7 +50,7 @@ var CommentComponent = (function () {
         this.modalBtnTitle = "Update";
         this.comment = this.comments.filter(function (x) { return x.Id == id; })[0];
         this.commentFrm.setValue(this.comment);
-        this.modalComment.open();
+        //this.modalComment.open();
     };
     CommentComponent.prototype.deleteComment = function (id) {
         this.dbops = enum_1.DBOperation.delete;
@@ -58,7 +59,7 @@ var CommentComponent = (function () {
         this.modalBtnTitle = "Delete";
         this.comment = this.comments.filter(function (x) { return x.Id == id; })[0];
         this.commentFrm.setValue(this.comment);
-        this.modalComment.open();
+        //this.modalComment.open();
     };
     CommentComponent.prototype.SetControlsState = function (isEnable) {
         isEnable ? this.commentFrm.enable() : this.commentFrm.disable();
@@ -76,7 +77,7 @@ var CommentComponent = (function () {
                     else {
                         _this.msg = "There is some issue in saving records, please contact to system administrator!";
                     }
-                    _this.modalComment.dismiss();
+                    _this.addComment();
                 }, function (error) {
                     _this.msg = error;
                 });
@@ -90,7 +91,7 @@ var CommentComponent = (function () {
                     else {
                         _this.msg = "There is some issue in saving records, please contact to system administrator!";
                     }
-                    _this.modalComment.dismiss();
+                    _this.addComment();
                 }, function (error) {
                     _this.msg = error;
                 });
@@ -104,7 +105,7 @@ var CommentComponent = (function () {
                     else {
                         _this.msg = "There is some issue in saving records, please contact to system administrator!";
                     }
-                    _this.modalComment.dismiss();
+                    _this.addComment();
                 }, function (error) {
                     _this.msg = error;
                 });

@@ -38,6 +38,7 @@ export class CommentComponent implements OnInit {
         });
 
         this.LoadComments();
+        this.addComment();
     }
 
     LoadComments(): void {
@@ -53,7 +54,7 @@ export class CommentComponent implements OnInit {
         this.modalTitle = "Add New Comment";
         this.modalBtnTitle = "Add";
         this.commentFrm.reset();
-        this.modalComment.open();
+        //this.modalComment.open();
     }
 
     editComment(id: string) {
@@ -63,7 +64,7 @@ export class CommentComponent implements OnInit {
         this.modalBtnTitle = "Update";
         this.comment = this.comments.filter(x => x.Id == id)[0];
         this.commentFrm.setValue(this.comment);
-        this.modalComment.open();
+        //this.modalComment.open();
     }
 
     deleteComment(id: string) {
@@ -73,7 +74,7 @@ export class CommentComponent implements OnInit {
         this.modalBtnTitle = "Delete";
         this.comment = this.comments.filter(x => x.Id == id)[0];
         this.commentFrm.setValue(this.comment);
-        this.modalComment.open();
+        //this.modalComment.open();
     }
 
     SetControlsState(isEnable: boolean) {
@@ -96,7 +97,7 @@ export class CommentComponent implements OnInit {
                             this.msg = "There is some issue in saving records, please contact to system administrator!"
                         }
 
-                        this.modalComment.dismiss();
+                        this.addComment();
                     },
                     error => {
                         this.msg = error;
@@ -115,7 +116,7 @@ export class CommentComponent implements OnInit {
                             this.msg = "There is some issue in saving records, please contact to system administrator!"
                         }
 
-                        this.modalComment.dismiss();
+                        this.addComment();
                     },
                     error => {
                         this.msg = error;
@@ -134,7 +135,7 @@ export class CommentComponent implements OnInit {
                             this.msg = "There is some issue in saving records, please contact to system administrator!"
                         }
 
-                        this.modalComment.dismiss();
+                        this.addComment();
                     },
                     error => {
                         this.msg = error;

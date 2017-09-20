@@ -20,7 +20,7 @@ import { IndexComponent } from './components/index.component';
 
 const appRoutes: Routes = [
     { path: '', component: IndexComponent },
-    { path: 'article/', component: ArticleComponent },
+    { path: 'article', component: ArticleComponent },
     { path: 'deteils/:id', component: DeteilsComponent },
     { path: '**', component: NotFoundComponent },
 ];

@@ -1,24 +1,26 @@
-﻿<!-- Page Header -->
-
-<header class="masthead" style="background-image: url('../../img/post-bg.jpg');">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="post-heading">
-                    <h1>{{article.Headline}}</h1>
+﻿
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('../../img/post-bg.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-heading">
+                        <h1>{{article.Headline}}</h1>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 
-<article>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                {{article.Text}}
-                <comment-app [ArticleId]="id"></comment-app>
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    {{article.Text}}
+                    <hr>
+                    <comment-app [ArticleId]="id"></comment-app>
+                </div>
             </div>
         </div>
-    </div>
-</article>
+    </article>
+<hr>

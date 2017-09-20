@@ -1,15 +1,32 @@
 ﻿
 <div class='comment-section'>
-    <!--<h4>Comments:</h4>-->
-    <div>
+    <!-- Comments Form -->
+    <div class="card my-4">
+        <h5 class="card-header">{{modalTitle}}:</h5>
+        <div class="card-body">
+            <form novalidate (ngSubmit)="onSubmit(commentFrm)" [formGroup]="commentFrm">
+                <div class="form-group">
+                    <textarea rows="3" class="form-control" placeholder="Text" formControlName="Text"></textarea>
+                </div>
+                <button type="submit" [disabled]="commentFrm.invalid" class="btn btn-primary">{{modalBtnTitle}}</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div *ngIf="comments">
         <div class="alert alert-info" role="alert" *ngIf="indLoading">Loading...</div>
         <div *ngIf='comments && comments.length==0' class="alert alert-info" role="alert">No record found!</div>
         <div *ngIf='comments && comments.length'>
-            <div *ngFor="let comment of comments" class="my-comment">
-                <div>{{comment.Text}}</div>
-                <div>
-                    <button title="Edit" class="btn btn-primary" (click)="editComment(comment.Id)">Edit</button>
-                    <button title="Delete" class="btn btn-danger" (click)="deleteComment(comment.Id)">Delete</button>
+            <div *ngFor="let comment of comments" class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="../../img/50x50.jpg" />
+                <div class="media-body">
+                    <h5 class="mt-0">Commenter Name</h5>
+                    <div>{{comment.Text}}</div>
+                    <div>
+                        <button title="Edit" class="btn btn-primary" (click)="editComment(comment.Id)">Edit</button>
+                        <button title="Delete" class="btn btn-danger" (click)="deleteComment(comment.Id)">Delete</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -23,26 +40,11 @@
         <span class="sr-only">Error:</span>
         {{msg}}
     </div>
+
+    
+
 </div>
 
-<modal #modalComment>
-    <form novalidate (ngSubmit)="onSubmit(commentFrm)" [formGroup]="commentFrm">
-        <modal-header [show-close]="true">
-            <h4 class="modal-title">{{modalTitle}}</h4>
-        </modal-header>
-        <modal-body>
-            <div class="form-group">
-                <div>
-                    <span>Text*</span>
-                    <textarea rows="5" class="form-control" placeholder="Text" formControlName="Text"></textarea>
-                </div>
-            </div>
-        </modal-body>
-        <modal-footer>
-            <div>
-                <a class="btn btn-default" (click)="modalComment.dismiss()">Cancel</a>
-                <button type="submit" [disabled]="commentFrm.invalid" class="btn btn-primary">{{modalBtnTitle}}</button>
-            </div>
-        </modal-footer>
-    </form>
-</modal>
+
+
+

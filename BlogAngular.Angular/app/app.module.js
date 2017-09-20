@@ -24,7 +24,7 @@ var not_found_component_1 = require("./components/not-found.component");
 var index_component_1 = require("./components/index.component");
 var appRoutes = [
     { path: '', component: index_component_1.IndexComponent },
-    { path: 'article/', component: article_component_1.ArticleComponent },
+    { path: 'article', component: article_component_1.ArticleComponent },
     { path: 'deteils/:id', component: deteils_component_1.DeteilsComponent },
     { path: '**', component: not_found_component_1.NotFoundComponent },
 ];
